@@ -91,8 +91,14 @@ namespace InventoryProject
             InitializeComponent();
             this.FormClosed += our_FormClosed;
             FileAccessModule FAM = new FileAccessModule();
-            List<Game> newgames = FAM.CreateGame(10);
+            List<Game> newgames = FAM.CreateGame(3);
+
+
+            RandomizeGame RandomGame = new RandomizeGame();
+
+            Game newGG = new Game(123 + "", "GameOne", "StudioOne", "Spook", 60.00, RandomGame.RandomizeDate(), 99, 500000, 20);
             FAM.ToGameFile(newgames);
+            FAM.ToGameFile(newGG);
         }
 
         private void our_FormClosed(object sender, FormClosedEventArgs e)

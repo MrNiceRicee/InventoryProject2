@@ -51,7 +51,6 @@ namespace InventoryProject.Classes
             FileStrings = File.ReadAllLines(getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt")).ToList();
 
 
-
             //Check every line of the FileStrings
             for (int i = 0; i < FileStrings.Count; i++)
             {
@@ -119,6 +118,16 @@ namespace InventoryProject.Classes
                 File.AppendAllText(gameLocation,games[i].saveInfo().ToString() + Environment.NewLine);
             }
         }
+
+        public void ToGameFile(Game addGame)
+        {
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
+            File.AppendAllText(gameLocation, addGame.saveInfo().ToString() + Environment.NewLine);
+
+        }
+
+
+
 
 
     }
