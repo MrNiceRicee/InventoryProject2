@@ -137,5 +137,21 @@ namespace InventoryProject
             return Convert.ToInt32((rando.Next(100, 1000000)) * (Convert.ToDouble(ratings) / 100));
         }
 
+
+        public Game RandomGameOut()
+        {
+            int ratings = RandomRating();
+            Game newGame = new Game(0+"",
+                            RandomizeName("PreName") + " " + RandomizeName("SufName"),
+                            RandomizeName("PreStudio") + " " + RandomizeName("SufStudio"),
+                            RandomizeName("Genre"),
+                            RandomizePrice(),
+                            RandomizeDate(),
+                            ratings,
+                            RandomSold(ratings),
+                            0
+                            );
+            return newGame;
+        }
     }
 }

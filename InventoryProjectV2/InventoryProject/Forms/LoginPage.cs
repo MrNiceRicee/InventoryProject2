@@ -1,5 +1,5 @@
 ﻿using InventoryProject.Classes;
-using InventoryProject.Forms;
+//using InventoryProject.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +21,6 @@ namespace InventoryProject
     public partial class LoginPage : Form
     {
         User loggedIn;
-        WelcomePage Welcomepage;
         Boolean CloseUp = true;         
 
 
@@ -45,7 +44,7 @@ namespace InventoryProject
             }
         }
 
-        public void loggingIn()
+/*        public void loggingIn()
         {
             string username = this.UsernameBox.Text;
             string password = this.PasswordBox.Text;
@@ -84,21 +83,16 @@ namespace InventoryProject
                 loggedIn = null;
                 this.Hide();            
             }
-        }
+        }*/
 
-        private void generatesGames(int amount)
-        {
-            FileAccessModule FAM = new FileAccessModule();
-            List<Game> libraryofGames = new List<Game>();
-            FAM.FromGameFile("", libraryofGames);
-            FAM.initateGames(amount, libraryofGames);
-            FAM.ToGameFile("", libraryofGames);
-        }
+
         public LoginPage()
         {
             InitializeComponent();
             this.FormClosed += our_FormClosed;
-            generatesGames(100);          //uncomment this to generate games, by some amount you want.
+            FileAccessModule FAM = new FileAccessModule();
+            List<Game> newgames = FAM.CreateGame(10);
+            FAM.ToGameFile(newgames);
         }
 
         private void our_FormClosed(object sender, FormClosedEventArgs e)
@@ -112,13 +106,13 @@ namespace InventoryProject
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            loggingIn();
-        }
+/*            loggingIn();
+*/        }
 
         private void NewUserButton_Click(object sender, EventArgs e)
         {
-            RegisterPage j = new RegisterPage();
-            j.Show();
+            //RegisterPage j = new RegisterPage();
+            //j.Show();
             this.Hide();
         }
 
@@ -156,10 +150,10 @@ namespace InventoryProject
 
         private void PasswordBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar==Convert.ToChar(Keys.Enter))
+/*            if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
                 loggingIn();
-            }
+            }*/
         }
     }
 }
