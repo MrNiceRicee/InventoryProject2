@@ -165,6 +165,10 @@ namespace InventoryProject.Forms
                 this.PasswordWarning.Visible = true;
                 this.PasswordWarning.Text = "At least "+PasswordLength+" characters";
             }
+            else if (this.PasswordBox.Text.Length >= PasswordLength)
+            {
+                this.PasswordWarning.Visible = false;
+            }
             else if (this.PasswordBox.Text.Equals(this.PasswordConfirmBox.Text))
             {
                 this.PasswordWarning.Text = "Password match";

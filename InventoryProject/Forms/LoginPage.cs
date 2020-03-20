@@ -1,5 +1,5 @@
 ﻿using InventoryProject.Classes;
-//using InventoryProject.Forms;
+using InventoryProject.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,8 +20,8 @@ namespace InventoryProject
 
     public partial class LoginPage : Form
     {
-        User loggedIn;
-        Boolean CloseUp = true;         
+        Boolean CloseUp = true;
+        User testUser = new User("SomeGuy", "TestUser", "123");
 
 
         public void wait(int milliseconds)
@@ -56,7 +56,8 @@ namespace InventoryProject
                 wait(1500);
                 this.LogInWarning.Visible = false;
 
-            }else                                                    
+            }
+            else
             {
                 //Check user came positive
                 //we can search it now
@@ -81,7 +82,7 @@ namespace InventoryProject
                 this.UsernameBox.Text = "";
                 this.PasswordBox.Text = "";
                 loggedIn = null;
-                this.Hide();            
+                this.Hide();
             }
         }*/
 
@@ -91,14 +92,16 @@ namespace InventoryProject
             InitializeComponent();
             this.FormClosed += our_FormClosed;
             FileAccessModule FAM = new FileAccessModule();
-            List<Game> newgames = FAM.CreateGame(3);
 
 
             RandomizeGame RandomGame = new RandomizeGame();
 
-            Game newGG = new Game(123 + "", "GameOne", "StudioOne", "Spook", 60.00, RandomGame.RandomizeDate(), 99, 500000, 20);
-            FAM.ToGameFile(newgames);
-            FAM.ToGameFile(newGG);
+            //FAM.ToGameFile(FAM.CreateGame(10));
+
+
+            User testUser = new User("SomeGuy", "TestUser", "123");
+
+            FAM.checkUsernameExist(testUser.UserName);
         }
 
         private void our_FormClosed(object sender, FormClosedEventArgs e)
@@ -112,13 +115,16 @@ namespace InventoryProject
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-/*            loggingIn();
-*/        }
+            //loggingIn();        
+
+
+
+        }
 
         private void NewUserButton_Click(object sender, EventArgs e)
         {
-            //RegisterPage j = new RegisterPage();
-            //j.Show();
+            RegisterPage j = new RegisterPage();
+            j.Show();
             this.Hide();
         }
 
