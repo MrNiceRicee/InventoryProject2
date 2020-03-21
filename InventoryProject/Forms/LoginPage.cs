@@ -21,7 +21,8 @@ namespace InventoryProject
     public partial class LoginPage : Form
     {
         Boolean CloseUp = true;
-        User testUser = new User("SomeGuy", "TestUser", "123");
+        User loggedIn;
+        WelcomePage Welcomepage;
 
 
         public void wait(int milliseconds)
@@ -44,7 +45,7 @@ namespace InventoryProject
             }
         }
 
-/*        public void loggingIn()
+        public void loggingIn()
         {
             string username = this.UsernameBox.Text;
             string password = this.PasswordBox.Text;
@@ -66,16 +67,23 @@ namespace InventoryProject
                 wait(2000);
                 this.LogInWarning.Visible = false;
                 Console.WriteLine();
-                loggedIn = FAM.readUserFile(FAM.FindUserLocation(username) + "\\User.txt");
+                loggedIn = FAM.readUserFile(username,password);
 
-                Welcomepage = new WelcomePage(this);
+                StoreSystems LoggedIn = new StoreSystems();
+
+                LoggedIn.loggedUser = loggedIn;
+
+                Welcomepage = new WelcomePage(LoggedIn);
                 Welcomepage.StartPosition = FormStartPosition.Manual;
                 Welcomepage.Left = this.Location.X;
                 Welcomepage.Top = this.Location.Y;
                 Welcomepage.Location = this.Location;
                 Welcomepage.SetDesktopLocation(this.Location.X, this.Location.Y);
 
-                Welcomepage.setLoggedIn(loggedIn);
+                Welcomepage.setLoggedIn();
+
+                Welcomepage.MainForm = this;
+
                 Welcomepage.Show();
 
                 //Time to purge loggin
@@ -84,7 +92,7 @@ namespace InventoryProject
                 loggedIn = null;
                 this.Hide();
             }
-        }*/
+        }
 
 
         public LoginPage()
@@ -96,12 +104,7 @@ namespace InventoryProject
 
             RandomizeGame RandomGame = new RandomizeGame();
 
-            //FAM.ToGameFile(FAM.CreateGame(10));
-
-
-            User testUser = new User("SomeGuy", "TestUser", "123");
-
-            FAM.checkUsernameExist(testUser.UserName);
+           /* FAM.ToGameFile(FAM.CreateGame(10));*/
         }
 
         private void our_FormClosed(object sender, FormClosedEventArgs e)
@@ -115,7 +118,7 @@ namespace InventoryProject
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            //loggingIn();        
+            loggingIn();        
 
 
 
@@ -162,10 +165,10 @@ namespace InventoryProject
 
         private void PasswordBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-/*            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
                 loggingIn();
-            }*/
+            }
         }
     }
 }

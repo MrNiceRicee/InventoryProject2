@@ -10,15 +10,17 @@ using System.Windows.Forms;
 namespace InventoryProject.Classes
 {
          
-    internal class StoreSystems
+    public class StoreSystems
     {
-        internal User loggedIn;
-        List<Game> InCart;
+        internal User loggedUser;
+        internal List<Game> InCart;
+        internal Game SelectedGame;
 
-        public StoreSystems( User parentUser, List<Game> storedGames)
+        public StoreSystems()
         {
-            loggedIn = parentUser;
-            InCart = storedGames;
+            loggedUser = new User("","","");
+            InCart = new List<Game>();
+            SelectedGame = new Game("","","","",20,new DateTime(2000,12,12),0,0,0);
         }
 
 

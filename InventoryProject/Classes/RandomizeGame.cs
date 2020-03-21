@@ -31,6 +31,8 @@ namespace InventoryProject
         private String[] StoryBeginning = {"Breeze Morning","One Day","In the morning", "At night fall","While at brunch",
                                         "While eating lunch" };
 
+        private String[] StoryStrangeFeeling = {"Danger", "Dread", "Spook", "Glee", "Joy", "Excitement", "Terror", "Hope", "Hunger", "Hangry sensation" };
+
         private String[] StoryPrefix = {"Broken", "Shattered","Lost", "Forgotten", "Dark", "Deadly", 
                                                 "Harrowing", "Scattered", "Fiendish","Foolish","Beginner",
                                         };
@@ -71,15 +73,16 @@ namespace InventoryProject
             string Conflict = StoryQuest[rando.Next(0, StoryQuest.Length)];
 
             string storyBeginning = StoryBeginning[rando.Next(0, StoryBeginning.Length)];
+            string storyBeginningFeeling = StoryStrangeFeeling[rando.Next(0, StoryStrangeFeeling.Length)];
 
-            FairyTale.Add(storyBeginning + " the young Hero, " + HeroName + " Felt a sense of danger.");
+            FairyTale.Add(storyBeginning + " the young Hero, " + HeroName + " Felt a sense of "+ storyBeginningFeeling + ". <p>");
 
-            FairyTale.Add(HeroName + " walked outside and was transported to " + Location);
+            FairyTale.Add(HeroName + " walked outside and was transported to " + Location+ "<p>");
 
-            FairyTale.Add(HeroName + " Looked at their hand and surprisingly held a " + HeroItem);
-            FairyTale.Add("With the " + HeroItem + ", " + HeroName + " will have to  travel towards " + Location2);
-            FairyTale.Add("Where "+HeroName + " will have to "+ Conflict + " the villinaous " + VillianName + ".");
-            FairyTale.Add("All the while " + HeroName + " dearly misses their " + HeroLoves); 
+            FairyTale.Add(HeroName + " Looked at their hand and surprisingly held a " + HeroItem+ "<p>");
+            FairyTale.Add("With the " + HeroItem + ", " + HeroName + " will have to  travel towards " + Location2+ "<p>");
+            FairyTale.Add("Where "+HeroName + " will have to "+ Conflict + " the villinaous " + VillianName + ".<p>");
+            FairyTale.Add("All the while " + HeroName + " dearly misses their " + HeroLoves + "<p>"); 
 
             return FairyTale;
         }

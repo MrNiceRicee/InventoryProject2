@@ -99,7 +99,7 @@ namespace InventoryProject.Classes
                 newGame.GameID = GameIDCount.ToString();        //Have to establish gameID
 
                 newGames.Add(newGame);
-                GameIDCount++;
+                GameIDCount++;                                  //Game Count Add
                 File.WriteAllText(getLibrary("\\SaveFiles\\GameLibrary\\GameID.txt"),GameIDCount.ToString());                
             }
             return newGames;
@@ -121,14 +121,84 @@ namespace InventoryProject.Classes
         public void ToGameFile(Game addGame)
         {
             var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
-            File.AppendAllText(gameLocation, addGame.saveInfo().ToString() + Environment.NewLine);
+            int GameIDCount = getGameID();  //Get current Game ID count
+            addGame.GameID = GameIDCount.ToString();        //Add it to the game thats being added
+            GameIDCount++;  //increment by one
+
+
+            File.AppendAllText(gameLocation, addGame.saveInfo().ToString() + Environment.NewLine);  //write game to the public library
+            File.WriteAllText(getLibrary("\\SaveFiles\\GameLibrary\\GameID.txt"), GameIDCount.ToString());  //change gameid count
+
 
         }
 
 
+        public Boolean CheckGameStoryStatus(Game checkGame)
+        {
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameStories.txt");
+            List<String> TextStrings = new List<String>();
+
+            TextStrings = File.ReadAllLines(gameLocation).ToList();
+
+            for (int i = 0; i < TextStrings.Count; i++)
+            {
+                String[] SplitLine = Regex.Split(TextStrings[i], "/,/");
+
+                if (checkGame.GameID.Equals(SplitLine[0]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public List<String> GetGameStory(Game checkGame)
+        {
+            List<String> gameStory = new List<String>();
+
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameStories.txt");
+            List<String> TextStrings = new List<String>();
+
+            TextStrings = File.ReadAllLines(gameLocation).ToList();
+
+            for (int i = 0; i < TextStrings.Count; i++)
+            {
+                String[] SplitLine = Regex.Split(TextStrings[i], "/,/");
+                if (checkGame.GameID.Equals(SplitLine[0]))
+                {
+                    String[] SpaceStory = Regex.Split(SplitLine[1], "<p>");
+
+                    for (int x = 0; x < SpaceStory.Length; x++)
+                    {
+                        gameStory.Add(SpaceStory[x]);
+                    }
+                }
+
+            }
+            return gameStory;
+        }
+
+        public void makeGameStory(Game selectedGame)
+        {
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameStories.txt");
+
+            RandomizeGame randogame = new RandomizeGame();
+
+            String gameStory = selectedGame.GameID+"/,/";
+            List<String> gatheredStory = randogame.RandomStory();
+            for (int i = 0; i < gatheredStory.Count; i++)
+            {
+                gameStory += gatheredStory[i];
+            }
+
+            File.AppendAllText(gameLocation, gameStory + Environment.NewLine);  //write game to the public library
+
+        }
+
 
         //--------------------------------------------------------------//
-                    //Access Users
+        //Access Users
+
 
         public Boolean checkUsernameExist(string Username)
         {
@@ -181,20 +251,40 @@ namespace InventoryProject.Classes
 
         public void UpdateUserGames(User user)
         {
+
+            /*
+             * Gather the game from the user
+             * Get that list from User, compare it to the Global Inventory
+             * Change the User gamelist to match the global inventory.
+             * 
+             */
             var UserLocation = getLibrary("\\SaveFiles\\Users\\" + user.UserName);       //grabs username and finds folder location
             if (Directory.Exists(UserLocation))
             {
 
                 List<Game> PublicGameLibrary = GetGameLibrary();
-                user.gameLibrary = GetUserGameLibrary(user);
+                //user.gameLibrary = GetUserGameLibrary(user);
 
-                var OwnedGames = PublicGameLibrary.Where(a => user.gameLibrary.Any(b => b.GameID.Equals(a.GameID))).ToList();
-                Console.WriteLine("Updating "+user.UserName+ " Game library: "+OwnedGames.Count); 
+                var OwnedGames = PublicGameLibrary.Where(a => user.gameLibrary.Any(b => b.GameID.Equals(a.GameID))).ToList();       //Gather everything that matches gameID
+
+                var query = (from x in OwnedGames
+                             join y in user.gameLibrary
+                             on x.GameID equals y.GameID
+                             select new {x,y });
+
+                foreach (var item in query)
+                {
+                    item.x.PlayCount = item.y.PlayCount;        //Keep playcount from user Library
+                }
+
+                //Console.WriteLine("Updating "+user.UserName+ " Game library: "+OwnedGames.Count); 
+
                 using (System.IO.FileStream fs = File.Create(UserLocation + "\\uGameLibrary.txt"))   //create the gamelibrary txt initiate it
                 {
                     String allgames = "";
                     for (int x = 0; x < OwnedGames.Count; x++)
                     {
+
                         allgames += OwnedGames[x].saveInfo()+"\n";
                     }
                     Byte[] gameinfo = new UTF8Encoding(true).GetBytes(allgames);      //make the string to bytes
@@ -208,17 +298,18 @@ namespace InventoryProject.Classes
         public List<Game> GetUserGameLibrary(User user)
         {
             /*
-             * This method will get games from a file.
-             * Return all of those games in a list
-             * fileLocation is if there is a designated filelocation
+             * Purpose
+             * Go to the GameLibrary Txt from the user
+             * Put all of them to a list
              */
 
             List<Game> returnGame = new List<Game>();
 
             List<String> FileStrings = new List<String>();
-            var Location = getLibrary("\\SaveFiles\\Users\\" + user.UserName);       //grabs username and finds folder location
+            Console.WriteLine(user.UserName + " USERNAME");
+            var Location = getLibrary("\\SaveFiles\\Users\\" + user.UserName + "\\uGameLibrary.txt");       //grabs username and finds folder location
 
-            FileStrings = File.ReadAllLines(Location+"\\uGameLibrary.txt").ToList();
+            FileStrings = File.ReadAllLines(Location).ToList();
 
 
             //Check every line of the FileStrings
@@ -244,5 +335,74 @@ namespace InventoryProject.Classes
 
             return returnGame;
         }
+
+
+        public Boolean checkUser(string username, string password)
+        {
+            var location = getLibrary("\\SaveFiles\\Users\\" + username);
+            if (Directory.Exists(location))
+            {
+                var FileString = File.ReadAllLines(location+"\\User.txt");
+                String[] Split = Regex.Split(FileString[0],"/,/");      //only first line because there is only one line
+
+                Console.WriteLine("FileAccessModule. checkUser . checking user");
+
+                foreach (var item in Split)
+                {
+                    Console.WriteLine(item);
+                }
+
+                if (Split[1].Equals(username,StringComparison.InvariantCultureIgnoreCase) &&
+                    Split[2].Equals(password))
+                {
+                    Console.WriteLine("FileAccessModule. checkUser .User checks");
+                    return true;
+                }
+            }
+            Console.WriteLine("FileAccessModule. checkUser . Wrong information");
+
+            return false;
+        }
+
+        public User readUserFile(string username, string password)
+        {
+            User newUser = new User("", "", ""); //make generic, because we're going to change it
+
+            var location = getLibrary("\\SaveFiles\\Users\\" + username);
+            if (Directory.Exists(location))
+            {
+                var FileString = File.ReadAllLines(location + "\\User.txt");
+                String[] Split = Regex.Split(FileString[0], "/,/");      //only first line because there is only one line
+
+                if (Split[1].Equals(username, StringComparison.InvariantCultureIgnoreCase) &&
+                    Split[2].Equals(password))
+                {
+                    newUser.IGName = Split[0];
+                    newUser.UserName = Split[1];
+                    newUser.Password = Split[2];
+                    newUser.Funds = Convert.ToDouble(Split[3]);
+                }
+            }
+            return newUser;
+
+        }
+
+        public Boolean CheckUserAdmin(User selectUser)
+        {
+            var location = getLibrary("\\SaveFiles\\Users\\Admins.txt");
+
+            var FileString = File.ReadAllLines(location);
+
+            if (FileString.Any(a=> a.Equals(selectUser.UserName, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
+        }
+
     }
+
+
 }
