@@ -57,6 +57,7 @@ namespace InventoryProject.Forms
         {
             this.InCartLabel.Text = "(" + loggedStorage.InCart.Count + ") Cart";
             this.UserFunds.Text = string.Format("{0:C}", (loggedStorage.loggedUser.Funds));
+            initiatePage();
         }
 
         private void our_FormClosed(object sender, FormClosedEventArgs e)
@@ -102,9 +103,26 @@ namespace InventoryProject.Forms
             {
                 max = 10;
             }
+            parentPanel.Controls.Clear();
             //loop this thing
             for (int i = 0; i < max; i++)
             {
+                Bitmap gameImage;
+                //Generate Game Info
+                if (FAM.checkGameInfo(gamelibrary[i]))
+                {
+                    gameImage = FAM.getGameImage(gamelibrary[i]);
+                }
+                else
+                {
+                    FAM.generateGameInfo(gamelibrary[i]);
+                    gameImage = FAM.getGameImage(gamelibrary[i]);
+                }
+
+
+
+                //
+
                 //items in the label
                 Panel gameFrame = new Panel();                  //holds everthing
                 PictureBox gamePicture = new PictureBox();
@@ -120,7 +138,7 @@ namespace InventoryProject.Forms
                 gameFrame.Location = new Point(0, (i * (panelheight+2)));
                 gameFrame.Margin = new Padding(0);
                 gameFrame.Padding = new Padding(0);
-                gameFrame.Name = StoreLibrary.FindIndex(a => a.saveInfo().Equals(gamelibrary[i].saveInfo())).ToString();
+                gameFrame.Name = StoreLibrary.FindIndex(a => a.GameID.Equals(gamelibrary[i].GameID)).ToString();
                 gameFrame.BackColor = Color.FromArgb(10,18,29);
                 gameFrame.DoubleClick += CustomItem_DoubleClick;
                 gameFrame.MouseHover += CustomItem_Hover;
@@ -129,6 +147,9 @@ namespace InventoryProject.Forms
 
                 gamePicture.Size = new Size(gameFrame.Size.Height, gameFrame.Size.Height);        //makes it a box using the workframe width, this makes a box
                 gamePicture.BackColor = Color.FromArgb(50, 255, 255, 255);
+                gamePicture.BackgroundImage = gameImage;
+                gamePicture.BackgroundImageLayout = ImageLayout.Stretch;
+
 
 
                 gameTitle.Text = (i+1)+". "+gamelibrary[i].Name;

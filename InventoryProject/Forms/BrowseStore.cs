@@ -47,6 +47,24 @@ namespace InventoryProject.Forms
             for (int i = 0; i < gamelibrary.Count; i++)
             {
                 //items in the label
+                Bitmap gameImage;
+                //Generate Game Info
+                FileAccessModule FAM = new FileAccessModule();
+                if (FAM.checkGameInfo(gamelibrary[i]))
+                {
+                    gameImage = FAM.getGameImage(gamelibrary[i]);
+                }
+                else
+                {
+                    FAM.generateGameInfo(gamelibrary[i]);
+                    gameImage = FAM.getGameImage(gamelibrary[i]);
+                }
+
+
+
+                //
+
+                //items in the label
                 Panel gameFrame = new Panel();                  //holds everthing
                 PictureBox gamePicture = new PictureBox();
                 Label gameTitle = new Label();
@@ -54,14 +72,14 @@ namespace InventoryProject.Forms
                 Label gameRating = new Label();
                 Label gameSold = new Label();
                 Label gamePrice = new Label();
-
+                //Label gameGenre = new Label();
 
                 //make the labels
                 gameFrame.Size = new Size(parentPanel.Size.Width - edgepad, panelheight);                          //length of the entire panel, and then the height
                 gameFrame.Location = new Point(0, (i * (panelheight + 2)));
                 gameFrame.Margin = new Padding(0);
                 gameFrame.Padding = new Padding(0);
-                gameFrame.Name = StoreLibrary.FindIndex(a => a.saveInfo().Equals(gamelibrary[i].saveInfo())).ToString();
+                gameFrame.Name = StoreLibrary.FindIndex(a => a.GameID.Equals(gamelibrary[i].GameID)).ToString();
                 gameFrame.BackColor = Color.FromArgb(10, 18, 29);
                 gameFrame.DoubleClick += CustomItem_DoubleClick;
                 gameFrame.MouseHover += CustomItem_Hover;
@@ -70,6 +88,8 @@ namespace InventoryProject.Forms
 
                 gamePicture.Size = new Size(gameFrame.Size.Height, gameFrame.Size.Height);        //makes it a box using the workframe width, this makes a box
                 gamePicture.BackColor = Color.FromArgb(50, 255, 255, 255);
+                gamePicture.BackgroundImage = gameImage;
+                gamePicture.BackgroundImageLayout = ImageLayout.Stretch;
 
 
                 gameTitle.Text = (i + 1) + ". " + gamelibrary[i].Name;
@@ -186,6 +206,7 @@ namespace InventoryProject.Forms
 
             SearchLibrary.AddRange(Namesearched.Except(SearchLibrary));
             SearchLibrary.AddRange(Studiosearched.Except(SearchLibrary));
+
             List<String> SelectedGenre = GenreCheckList.CheckedItems.OfType<String>().ToList();
             if (SelectedGenre.Count ==0)
             {
@@ -271,8 +292,30 @@ namespace InventoryProject.Forms
             }
 
 
+            if (this.NotOwnedRadio.Checked)         
+            {
+                FinalSearchLibrary.RemoveAll(a=> LoggedUser.gameLibrary.Any(b=> b.GameID.Equals(a.GameID)));        //removes items if its owned
+            }
+
             GamePanels(this.GameResultsPanel, FinalSearchLibrary);
         }
+
+        //-----------------Listeners
+
+        private void OwnedRadioButton(object sender, EventArgs e)
+        {
+            RadioButton suspect = (RadioButton)sender;
+
+            if (suspect.Name.Equals(this.OwnedRadio.Name))
+            {
+                this.NotOwnedRadio.Checked = false;
+            }else if (suspect.Name.Equals(this.NotOwnedRadio.Name))
+            {
+                this.OwnedRadio.Checked = false;
+            }
+        }
+
+
 
 
         private void SearchBoxEnter(object sender, EventArgs e)
@@ -405,12 +448,12 @@ namespace InventoryProject.Forms
 
         private void GameResultsPanel_Scroll(object sender, ScrollEventArgs e)
         {
-            myScroll();
+            //myScroll();
         }
 
         private void GameResultsPanel_Scroll(object sender, EventArgs e)
         {
-            myScroll();
+            //myScroll();
         }
     }
 }

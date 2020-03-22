@@ -229,11 +229,19 @@ namespace InventoryProject.Forms
                         }*/
                         if (loggedBuyer.Funds >= total)
                         {
-                            loggedBuyer.Funds -= total;
-                            loggedBuyer.gameLibrary.AddRange(checkout);
-                            checkout.Clear();
-                            GamePanels(this.InCartPanel,checkout);
                             FileAccessModule FAM = new FileAccessModule();
+
+                            loggedBuyer.Funds -= total;
+                            loggedBuyer.gameLibrary.AddRange(checkout);     //add it to the game library
+
+                            for (int i = 0; i < checkout.Count; i++)        //plus one to the sold
+                            {
+                                checkout[i].ItemSold++;
+                            }
+                            FAM.UpdateGameFile(checkout);
+                            checkout.Clear();                               //clear the cart    
+
+                            GamePanels(this.InCartPanel,checkout);
                             FAM.saveUser(loggedBuyer);
                             updatePage();
                         }else

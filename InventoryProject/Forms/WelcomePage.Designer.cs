@@ -231,6 +231,8 @@
             this.Name = "WelcomePage";
             this.Text = "WelcomePage";
             this.Activated += new System.EventHandler(this.Form_Focused);
+            this.Load += new System.EventHandler(this.Form_Focused);
+            this.Shown += new System.EventHandler(this.Form_Focused);
             this.Enter += new System.EventHandler(this.Form_Focused);
             this.Leave += new System.EventHandler(this.Form_Focused);
             ((System.ComponentModel.ISupportInitialize)(this.CartPicture)).EndInit();

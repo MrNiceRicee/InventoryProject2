@@ -168,7 +168,7 @@
   <ItemGroup>
     <Content Include="SaveFiles\GameLibrary\GameLibrary.txt" />
     <Content Include="SaveFiles\GameLibrary\GameID.txt" />
-    <Content Include="SaveFiles\GameLibrary\GameStories.txt" />
+    <Content Include="SaveFiles\GameLibrary\GameInfo.txt" />
     <Content Include="SaveFiles\Users\someuser\uGameLibrary.txt" />
     <Content Include="SaveFiles\Users\someuser\User.txt" />
     <Content Include="SaveFiles\Users\TestUser\uGameLibrary.txt" />
@@ -186,6 +186,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SaveFiles\GameLibrary\GameImages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

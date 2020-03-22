@@ -1,5 +1,7 @@
-0/,/Duke Bros/,/Crimson Final/,/RPG/,/70.99/,/3/19/2013 12:00:00 AM/,/43/,/351111/,/19
-36/,/One Horizon/,/Unreal Gaming/,/Racing/,/30.99/,/8/5/2004 12:00:00 AM/,/89/,/802640/,/16
-45/,/Queen Hero/,/Bloody Reality/,/Puzzle/,/70.99/,/1/8/2013 12:00:00 AM/,/87/,/786497/,/6
-29/,/Duex Hazards/,/Black Gaming/,/RPG/,/30.99/,/9/25/2013 12:00:00 AM/,/99/,/697575/,/0
-82/,/Zero Theft/,/Crimson World/,/Action/,/70.99/,/7/15/2017 12:00:00 AM/,/99/,/425181/,/0
+36/,/One Horizon/,/Unreal Gaming/,/Racing/,/30.99/,/8/5/2004 12:00:00 AM/,/89/,/802640/,/5
+45/,/Queen Hero/,/Bloody Reality/,/Puzzle/,/70.99/,/1/8/2013 12:00:00 AM/,/87/,/786498/,/0
+50/,/Alpha Command/,/Get Studio/,/Action/,/30.99/,/2/11/2008 12:00:00 AM/,/87/,/777075/,/0
+24/,/Golden Crowd/,/First Go/,/MMORPG/,/20.99/,/6/12/2018 12:00:00 AM/,/96/,/744332/,/0
+32/,/Grand Hero/,/Level Up Gaming/,/MMORPG/,/30.99/,/8/9/2007 12:00:00 AM/,/90/,/712004/,/0
+29/,/Duex Hazards/,/Black Gaming/,/RPG/,/30.99/,/9/25/2013 12:00:00 AM/,/99/,/697576/,/0
+82/,/Zero Theft/,/Crimson World/,/Action/,/70.99/,/7/15/2017 12:00:00 AM/,/99/,/425182/,/0

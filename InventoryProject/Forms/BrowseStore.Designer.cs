@@ -33,6 +33,8 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.GenreCheckList = new System.Windows.Forms.CheckedListBox();
             this.FilterBox = new System.Windows.Forms.ComboBox();
+            this.OwnedRadio = new System.Windows.Forms.RadioButton();
+            this.NotOwnedRadio = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // GameResultsPanel
@@ -119,11 +121,39 @@
             "Least Liked",
             "Most Popular",
             "Least Popular"});
-            this.FilterBox.Location = new System.Drawing.Point(457, 203);
-            this.FilterBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FilterBox.Location = new System.Drawing.Point(456, 217);
+            this.FilterBox.Margin = new System.Windows.Forms.Padding(2);
             this.FilterBox.Name = "FilterBox";
-            this.FilterBox.Size = new System.Drawing.Size(222, 21);
+            this.FilterBox.Size = new System.Drawing.Size(341, 21);
             this.FilterBox.TabIndex = 7;
+            // 
+            // OwnedRadio
+            // 
+            this.OwnedRadio.AutoSize = true;
+            this.OwnedRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OwnedRadio.ForeColor = System.Drawing.SystemColors.MenuBar;
+            this.OwnedRadio.Location = new System.Drawing.Point(457, 158);
+            this.OwnedRadio.Name = "OwnedRadio";
+            this.OwnedRadio.Size = new System.Drawing.Size(133, 24);
+            this.OwnedRadio.TabIndex = 8;
+            this.OwnedRadio.Text = "Include Owned";
+            this.OwnedRadio.UseVisualStyleBackColor = true;
+            this.OwnedRadio.Click += new System.EventHandler(this.OwnedRadioButton);
+            // 
+            // NotOwnedRadio
+            // 
+            this.NotOwnedRadio.AutoSize = true;
+            this.NotOwnedRadio.Checked = true;
+            this.NotOwnedRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NotOwnedRadio.ForeColor = System.Drawing.SystemColors.MenuBar;
+            this.NotOwnedRadio.Location = new System.Drawing.Point(457, 188);
+            this.NotOwnedRadio.Name = "NotOwnedRadio";
+            this.NotOwnedRadio.Size = new System.Drawing.Size(137, 24);
+            this.NotOwnedRadio.TabIndex = 9;
+            this.NotOwnedRadio.TabStop = true;
+            this.NotOwnedRadio.Text = "Exclude Owned";
+            this.NotOwnedRadio.UseVisualStyleBackColor = true;
+            this.NotOwnedRadio.Click += new System.EventHandler(this.OwnedRadioButton);
             // 
             // BrowseStore
             // 
@@ -131,6 +161,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.NotOwnedRadio);
+            this.Controls.Add(this.OwnedRadio);
             this.Controls.Add(this.FilterBox);
             this.Controls.Add(this.GenreCheckList);
             this.Controls.Add(this.SearchButton);
@@ -150,5 +182,7 @@
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.CheckedListBox GenreCheckList;
         private System.Windows.Forms.ComboBox FilterBox;
+        private System.Windows.Forms.RadioButton OwnedRadio;
+        private System.Windows.Forms.RadioButton NotOwnedRadio;
     }
 }

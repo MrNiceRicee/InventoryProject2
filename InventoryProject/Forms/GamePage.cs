@@ -46,7 +46,7 @@ namespace InventoryProject.Forms
         internal void initiateGamePage()
         {
 
-            CheckGameStory();
+            chekGameInfo();
             this.GameTitleLabel.Text = RegisteredGame.Name;
             this.GameStudioLabel.Text = RegisteredGame.Studio;
             this.GameRatingLabel.Text = RegisteredGame.Ratings + "%";
@@ -68,15 +68,19 @@ namespace InventoryProject.Forms
             initiateGamePage();
         }*/
 
-        private void CheckGameStory()
+        private void chekGameInfo()
         {
-            if (FAM.CheckGameStoryStatus(RegisteredGame))
+            if (FAM.checkGameInfo(RegisteredGame))
             {
-                this.GameDescriptionBox.DataSource = FAM.GetGameStory(RegisteredGame);
+                this.GameDescriptionBox.DataSource = FAM.getGameDescription(RegisteredGame);
+                this.GamePictureBox.BackgroundImage = FAM.getGameImage(RegisteredGame);
+                this.GamePictureBox.BackgroundImageLayout = ImageLayout.Stretch;
             }else
             {
-                FAM.makeGameStory(RegisteredGame);
-                this.GameDescriptionBox.DataSource = FAM.GetGameStory(RegisteredGame);
+                FAM.generateGameInfo(RegisteredGame);
+                this.GameDescriptionBox.DataSource = FAM.getGameDescription(RegisteredGame);
+                this.GamePictureBox.BackgroundImage = FAM.getGameImage(RegisteredGame);
+                this.GamePictureBox.BackgroundImageLayout = ImageLayout.Stretch;
 
             }
         }

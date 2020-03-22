@@ -31,6 +31,13 @@
             this.ModeSelection = new System.Windows.Forms.ComboBox();
             this.ModeLabel = new System.Windows.Forms.Label();
             this.AddTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.TextLabel7 = new System.Windows.Forms.TextBox();
+            this.TextLabel6 = new System.Windows.Forms.TextBox();
+            this.TextLabel5 = new System.Windows.Forms.TextBox();
+            this.TextLabel4 = new System.Windows.Forms.TextBox();
+            this.TextLabel3 = new System.Windows.Forms.TextBox();
+            this.TextLabel2 = new System.Windows.Forms.TextBox();
+            this.TextLabel1 = new System.Windows.Forms.TextBox();
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.TextBox2 = new System.Windows.Forms.TextBox();
             this.TextBox3 = new System.Windows.Forms.TextBox();
@@ -38,14 +45,9 @@
             this.TextBox5 = new System.Windows.Forms.TextBox();
             this.TextBox6 = new System.Windows.Forms.TextBox();
             this.TextBox7 = new System.Windows.Forms.TextBox();
-            this.TextLabel1 = new System.Windows.Forms.TextBox();
-            this.TextLabel2 = new System.Windows.Forms.TextBox();
-            this.TextLabel3 = new System.Windows.Forms.TextBox();
-            this.TextLabel4 = new System.Windows.Forms.TextBox();
-            this.TextLabel5 = new System.Windows.Forms.TextBox();
-            this.TextLabel6 = new System.Windows.Forms.TextBox();
-            this.TextLabel7 = new System.Windows.Forms.TextBox();
             this.ConfirmButton = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.AddTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,6 +115,63 @@
             this.AddTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.AddTableLayoutPanel.Size = new System.Drawing.Size(430, 294);
             this.AddTableLayoutPanel.TabIndex = 6;
+            this.AddTableLayoutPanel.Visible = false;
+            // 
+            // TextLabel7
+            // 
+            this.TextLabel7.Location = new System.Drawing.Point(3, 219);
+            this.TextLabel7.Name = "TextLabel7";
+            this.TextLabel7.ReadOnly = true;
+            this.TextLabel7.Size = new System.Drawing.Size(209, 30);
+            this.TextLabel7.TabIndex = 14;
+            // 
+            // TextLabel6
+            // 
+            this.TextLabel6.Location = new System.Drawing.Point(3, 183);
+            this.TextLabel6.Name = "TextLabel6";
+            this.TextLabel6.ReadOnly = true;
+            this.TextLabel6.Size = new System.Drawing.Size(209, 30);
+            this.TextLabel6.TabIndex = 13;
+            // 
+            // TextLabel5
+            // 
+            this.TextLabel5.Location = new System.Drawing.Point(3, 147);
+            this.TextLabel5.Name = "TextLabel5";
+            this.TextLabel5.ReadOnly = true;
+            this.TextLabel5.Size = new System.Drawing.Size(209, 30);
+            this.TextLabel5.TabIndex = 12;
+            // 
+            // TextLabel4
+            // 
+            this.TextLabel4.Location = new System.Drawing.Point(3, 111);
+            this.TextLabel4.Name = "TextLabel4";
+            this.TextLabel4.ReadOnly = true;
+            this.TextLabel4.Size = new System.Drawing.Size(209, 30);
+            this.TextLabel4.TabIndex = 11;
+            // 
+            // TextLabel3
+            // 
+            this.TextLabel3.Location = new System.Drawing.Point(3, 75);
+            this.TextLabel3.Name = "TextLabel3";
+            this.TextLabel3.ReadOnly = true;
+            this.TextLabel3.Size = new System.Drawing.Size(209, 30);
+            this.TextLabel3.TabIndex = 10;
+            // 
+            // TextLabel2
+            // 
+            this.TextLabel2.Location = new System.Drawing.Point(3, 39);
+            this.TextLabel2.Name = "TextLabel2";
+            this.TextLabel2.ReadOnly = true;
+            this.TextLabel2.Size = new System.Drawing.Size(209, 30);
+            this.TextLabel2.TabIndex = 9;
+            // 
+            // TextLabel1
+            // 
+            this.TextLabel1.Location = new System.Drawing.Point(3, 3);
+            this.TextLabel1.Name = "TextLabel1";
+            this.TextLabel1.ReadOnly = true;
+            this.TextLabel1.Size = new System.Drawing.Size(209, 30);
+            this.TextLabel1.TabIndex = 8;
             // 
             // TextBox1
             // 
@@ -163,62 +222,6 @@
             this.TextBox7.Size = new System.Drawing.Size(209, 30);
             this.TextBox7.TabIndex = 6;
             // 
-            // TextLabel1
-            // 
-            this.TextLabel1.Location = new System.Drawing.Point(3, 3);
-            this.TextLabel1.Name = "TextLabel1";
-            this.TextLabel1.ReadOnly = true;
-            this.TextLabel1.Size = new System.Drawing.Size(209, 30);
-            this.TextLabel1.TabIndex = 8;
-            // 
-            // TextLabel2
-            // 
-            this.TextLabel2.Location = new System.Drawing.Point(3, 39);
-            this.TextLabel2.Name = "TextLabel2";
-            this.TextLabel2.ReadOnly = true;
-            this.TextLabel2.Size = new System.Drawing.Size(209, 30);
-            this.TextLabel2.TabIndex = 9;
-            // 
-            // TextLabel3
-            // 
-            this.TextLabel3.Location = new System.Drawing.Point(3, 75);
-            this.TextLabel3.Name = "TextLabel3";
-            this.TextLabel3.ReadOnly = true;
-            this.TextLabel3.Size = new System.Drawing.Size(209, 30);
-            this.TextLabel3.TabIndex = 10;
-            // 
-            // TextLabel4
-            // 
-            this.TextLabel4.Location = new System.Drawing.Point(3, 111);
-            this.TextLabel4.Name = "TextLabel4";
-            this.TextLabel4.ReadOnly = true;
-            this.TextLabel4.Size = new System.Drawing.Size(209, 30);
-            this.TextLabel4.TabIndex = 11;
-            // 
-            // TextLabel5
-            // 
-            this.TextLabel5.Location = new System.Drawing.Point(3, 147);
-            this.TextLabel5.Name = "TextLabel5";
-            this.TextLabel5.ReadOnly = true;
-            this.TextLabel5.Size = new System.Drawing.Size(209, 30);
-            this.TextLabel5.TabIndex = 12;
-            // 
-            // TextLabel6
-            // 
-            this.TextLabel6.Location = new System.Drawing.Point(3, 183);
-            this.TextLabel6.Name = "TextLabel6";
-            this.TextLabel6.ReadOnly = true;
-            this.TextLabel6.Size = new System.Drawing.Size(209, 30);
-            this.TextLabel6.TabIndex = 13;
-            // 
-            // TextLabel7
-            // 
-            this.TextLabel7.Location = new System.Drawing.Point(3, 219);
-            this.TextLabel7.Name = "TextLabel7";
-            this.TextLabel7.ReadOnly = true;
-            this.TextLabel7.Size = new System.Drawing.Size(209, 30);
-            this.TextLabel7.TabIndex = 14;
-            // 
             // ConfirmButton
             // 
             this.ConfirmButton.Location = new System.Drawing.Point(218, 255);
@@ -227,12 +230,40 @@
             this.ConfirmButton.TabIndex = 15;
             this.ConfirmButton.Text = "Confirm";
             this.ConfirmButton.UseVisualStyleBackColor = true;
+            this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(500, 61);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(85, 17);
+            this.radioButton1.TabIndex = 7;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "radioButton1";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.Visible = false;
+            this.radioButton1.Click += new System.EventHandler(this.RadioButton_Click);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(500, 83);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(85, 17);
+            this.radioButton2.TabIndex = 8;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "radioButton2";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.Click += new System.EventHandler(this.RadioButton_Click);
             // 
             // AdminPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.AddTableLayoutPanel);
             this.Controls.Add(this.ModeLabel);
             this.Controls.Add(this.ModeSelection);
@@ -265,5 +296,7 @@
         private System.Windows.Forms.TextBox TextBox6;
         private System.Windows.Forms.TextBox TextBox7;
         private System.Windows.Forms.Button ConfirmButton;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
     }
 }

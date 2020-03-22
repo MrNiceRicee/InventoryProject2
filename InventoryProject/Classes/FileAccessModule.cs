@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -74,6 +77,50 @@ namespace InventoryProject.Classes
             return returnGame;
         }
 
+        public void UpdateGameFile(List<Game> updateGameLibrary)
+        {
+            List<Game> currentSavedGames = GetGameLibrary();
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
+
+            var foundGames = currentSavedGames.Where(a => updateGameLibrary.Any(b => b.GameID.Equals(a.GameID))).ToList();       //Gather everything that matches gameID
+
+            var query = (from x in foundGames
+                         join y in updateGameLibrary
+                         on x.GameID equals y.GameID
+                         select new { x, y });
+
+            foreach (var item in query)
+            {
+                item.x.ItemSold = item.y.ItemSold;        //Keep playcount from user Library
+            }
+
+            //Console.WriteLine("Updating "+user.UserName+ " Game library: "+OwnedGames.Count); 
+
+            using (System.IO.FileStream fs = File.Create(gameLocation))   //create the gamelibrary txt initiate it
+            {
+                String allgames = "";
+                for (int x = 0; x < currentSavedGames.Count; x++)
+                {
+
+                    allgames += currentSavedGames[x].saveInfo() + "\n";
+                }
+                Byte[] gameinfo = new UTF8Encoding(true).GetBytes(allgames);      //make the string to bytes
+                fs.Write(gameinfo, 0, gameinfo.Length);                                       //make the thing
+            }
+
+
+        }
+        public void ToGameFile(List<Game> games)
+        {
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
+            //File.WriteAllText();
+
+            for (int i = 0; i < games.Count; i++)
+            {
+                File.AppendAllText(gameLocation, games[i].saveInfo().ToString() + Environment.NewLine);
+            }
+        }
+
         //Generate Games
 
 
@@ -107,18 +154,11 @@ namespace InventoryProject.Classes
 
         //Write to file as an Append. 
 
-        public void ToGameFile(List<Game> games)
-        {
-            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
-            //File.WriteAllText();
 
-            for (int i = 0; i < games.Count; i++)
-            {
-                File.AppendAllText(gameLocation,games[i].saveInfo().ToString() + Environment.NewLine);
-            }
-        }
 
-        public void ToGameFile(Game addGame)
+
+
+        public void CreateGame(Game addGame)
         {
             var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
             int GameIDCount = getGameID();  //Get current Game ID count
@@ -132,10 +172,40 @@ namespace InventoryProject.Classes
 
         }
 
+        // Generating Game Information
+        /*
+         * Generating Game descriptions
+         * Generating Game Pictures
+         */
 
-        public Boolean CheckGameStoryStatus(Game checkGame)
+
+        public void GatherImages(int amount)        //Makes images for the games
         {
-            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameStories.txt");
+            for (int i = 0; i < amount; i++)
+            {
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead("https://picsum.photos/200/?blur");
+                Bitmap bitmap = new Bitmap(stream);
+
+                string[] Files = Directory.GetFiles(getLibrary("\\SaveFiles\\GameLibrary\\GameImages"), "*", SearchOption.AllDirectories);     //find all the txt files
+                int imagecount = Files.Length;
+                Console.WriteLine("Files: "+ Files.Length+ " imagecount: "+imagecount);
+                if (bitmap !=null)
+                {
+                    bitmap.Save(getLibrary("\\SaveFiles\\GameLibrary\\GameImages\\"+(imagecount)+".jpeg"), ImageFormat.Jpeg);
+                }
+
+                stream.Flush();
+                stream.Close();
+                client.Dispose();
+            }
+
+        }
+
+
+        public Boolean checkGameInfo(Game checkGame)
+        {
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameInfo.txt");
             List<String> TextStrings = new List<String>();
 
             TextStrings = File.ReadAllLines(gameLocation).ToList();
@@ -152,11 +222,11 @@ namespace InventoryProject.Classes
             return false;
         }
 
-        public List<String> GetGameStory(Game checkGame)
+        public List<String> getGameDescription(Game checkGame)
         {
             List<String> gameStory = new List<String>();
 
-            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameStories.txt");
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameInfo.txt");
             List<String> TextStrings = new List<String>();
 
             TextStrings = File.ReadAllLines(gameLocation).ToList();
@@ -178,18 +248,53 @@ namespace InventoryProject.Classes
             return gameStory;
         }
 
-        public void makeGameStory(Game selectedGame)
+        public Bitmap getGameImage(Game checkGame)
         {
-            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameStories.txt");
+            Bitmap bitmap = new Bitmap(getLibrary("\\SaveFiles\\GameLibrary\\GameImages\\0.jpeg"));      //default one
 
-            RandomizeGame randogame = new RandomizeGame();
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameInfo.txt");
+            List<String> TextStrings = new List<String>();
 
-            String gameStory = selectedGame.GameID+"/,/";
-            List<String> gatheredStory = randogame.RandomStory();
+            TextStrings = File.ReadAllLines(gameLocation).ToList();
+
+            for (int i = 0; i < TextStrings.Count; i++)
+            {
+                String[] SplitLine = Regex.Split(TextStrings[i], "/,/");
+                if (checkGame.GameID.Equals(SplitLine[0]))
+                {
+                    bitmap = new Bitmap(getLibrary("\\SaveFiles\\GameLibrary\\GameImages\\"+SplitLine[2]));
+                }
+            }
+            return bitmap;
+        }
+
+        public void generateGameInfo(Game selectedGame)
+        {
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameInfo.txt");
+
+            RandomizeGame randogame = new RandomizeGame();      //Randomizer for games
+            Random random = new Random();                       //Random
+
+            string[] Pictures = Directory.GetFiles(getLibrary("\\SaveFiles\\GameLibrary\\GameImages"), "*", SearchOption.AllDirectories);     //find all the picture files
+            Console.WriteLine("FAM. generateGameInfo. Picture amount: "+ Pictures.Length); 
+
+
+            String gameStory = selectedGame.GameID+"/,/";       //make the gameID + separate
+
+            Console.WriteLine("FAM. generateGameInfo. gameStory: " + gameStory);
+
+            List<String> gatheredStory = randogame.RandomStory();       //generate game
+
+
             for (int i = 0; i < gatheredStory.Count; i++)
             {
-                gameStory += gatheredStory[i];
+                gameStory += gatheredStory[i];              //Add in the game story
             }
+
+            gameStory += "/,/" + (random.Next(0, Pictures.Length)) + ".jpeg";      //Generate a random picture
+
+
+            Console.WriteLine("FAM. generateGameInfo. gameStory: " + gameStory);
 
             File.AppendAllText(gameLocation, gameStory + Environment.NewLine);  //write game to the public library
 
@@ -401,6 +506,12 @@ namespace InventoryProject.Classes
                 return false;
             }
         }
+
+
+
+
+
+        
 
     }
 
