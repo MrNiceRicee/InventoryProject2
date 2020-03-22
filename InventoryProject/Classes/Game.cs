@@ -58,7 +58,7 @@ namespace InventoryProject
             "\n\tGenre: " + this.genre +
             "\n\tPrice: " + this.price +
             "\n\tPublish Date: " + this.DatePublished.ToString("MMMM dd, yyyy")+
-            "\n\tRatings"
+            "\n\tRatings " +this.ratings 
             );
         }
 

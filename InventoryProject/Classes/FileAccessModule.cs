@@ -50,8 +50,7 @@ namespace InventoryProject.Classes
 
             List<Game> returnGame = new List<Game>();
 
-            List<String> FileStrings = new List<String>();
-            FileStrings = File.ReadAllLines(getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt")).ToList();
+            List<String> FileStrings = File.ReadAllLines(getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt")).ToList();
 
             //Check every line of the FileStrings
             for (int i = 0; i < FileStrings.Count; i++)
@@ -107,9 +106,55 @@ namespace InventoryProject.Classes
                 Byte[] gameinfo = new UTF8Encoding(true).GetBytes(allgames);      //make the string to bytes
                 fs.Write(gameinfo, 0, gameinfo.Length);                                       //make the thing
             }
-
-
         }
+
+        public void UpdateGameFile(Game updatedGame)
+        {
+            List<Game> currentSavedGames = GetGameLibrary();
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
+
+            //Console.WriteLine("Updating "+user.UserName+ " Game library: "+OwnedGames.Count); 
+
+            using (System.IO.FileStream fs = File.Create(gameLocation))   //create the gamelibrary txt initiate it
+            {
+                String allgames = "";
+                for (int x = 0; x < currentSavedGames.Count; x++)
+                {
+                    if (currentSavedGames[x].GameID.Equals(updatedGame.GameID))
+                    {
+                        currentSavedGames[x] = updatedGame;
+                    }
+
+                    allgames += currentSavedGames[x].saveInfo() + "\n";
+                }
+                Byte[] gameinfo = new UTF8Encoding(true).GetBytes(allgames);      //make the string to bytes
+                fs.Write(gameinfo, 0, gameinfo.Length);                                       //make the thing
+            }
+        }
+        public void RemoveGame(Game updatedGame)
+        {
+            List<Game> currentSavedGames = GetGameLibrary();
+            var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
+
+            //Console.WriteLine("Updating "+user.UserName+ " Game library: "+OwnedGames.Count); 
+
+            using (System.IO.FileStream fs = File.Create(gameLocation))   //create the gamelibrary txt initiate it
+            {
+                String allgames = "";
+                for (int x = 0; x < currentSavedGames.Count; x++)
+                {
+                    if (currentSavedGames[x].GameID.Equals(updatedGame.GameID))
+                    {
+                        currentSavedGames.RemoveAt(x);
+                    }
+
+                    allgames += currentSavedGames[x].saveInfo() + "\n";
+                }
+                Byte[] gameinfo = new UTF8Encoding(true).GetBytes(allgames);      //make the string to bytes
+                fs.Write(gameinfo, 0, gameinfo.Length);                                       //make the thing
+            }
+        }
+
         public void ToGameFile(List<Game> games)
         {
             var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
@@ -502,6 +547,43 @@ namespace InventoryProject.Classes
             }
         }
 
+
+        public void makeUserAdmin(User selectUser)
+        {
+            var location = getLibrary("\\SaveFiles\\Users\\Admins.txt");
+            var FileString = File.ReadAllLines(location);
+
+            if (FileString.Any(a => a.Equals(selectUser.UserName, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                Console.WriteLine("Already Admin.");
+            }
+            else
+            {
+                File.AppendAllText(location, selectUser.UserName + Environment.NewLine);
+            }
+        }
+
+        public User ADMINreadUserFile(string username)           //ONLY ADMINS CAN USE THIS
+        {
+            User newUser = new User("", "", ""); //make generic, because we're going to change it
+
+            var location = getLibrary("\\SaveFiles\\Users\\" + username);
+            if (Directory.Exists(location))
+            {
+                var FileString = File.ReadAllLines(location + "\\User.txt");
+                String[] Split = Regex.Split(FileString[0], "/,/");      //only first line because there is only one line
+
+                if (Split[1].Equals(username, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    newUser.IGName = Split[0];
+                    newUser.UserName = Split[1];
+                    newUser.Password = Split[2];
+                    newUser.Funds = Convert.ToDouble(Split[3]);
+                }
+            }
+            return newUser;
+
+        }
 
 
         //------------------CLEAR ALL INFO
