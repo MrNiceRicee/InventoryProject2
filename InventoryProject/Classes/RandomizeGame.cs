@@ -18,7 +18,7 @@ namespace InventoryProject
                                             "Clutch", "Crowd", "Theft", "Invaders", "Command", "Kong", "Hazards",
                                             "Bros"};
 
-        internal String[] Genres = { "Action","FPS", "Adventure", "Simulator", "Puzzle", "Racing", "MMORPG", "RPG" };
+        internal String[] Genres = { "Action","FPS", "Adventure", "Simulator", "Puzzle", "Racing", "MMORPG", "RPG", "Horror", "Suspense", "Thriller", "Mystry", "RTS","Hack-n-Slash"};
 
         private String[] PreStudios = { "Unreal", "Red", "Black" , "Bloody", "Crimson", "Dark" , "Epic", "End",
                                             "Get", "Hello", "Level Up", "First"};

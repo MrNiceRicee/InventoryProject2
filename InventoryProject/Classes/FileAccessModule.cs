@@ -121,6 +121,7 @@ namespace InventoryProject.Classes
             }
         }
 
+
         //Generate Games
 
 
@@ -152,23 +153,17 @@ namespace InventoryProject.Classes
             return newGames;
         }
 
-        //Write to file as an Append. 
-
-
-
-
-
         public void CreateGame(Game addGame)
         {
+            //Mixture of Creategame and savetofile
+
             var gameLocation = getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt");
             int GameIDCount = getGameID();  //Get current Game ID count
             addGame.GameID = GameIDCount.ToString();        //Add it to the game thats being added
             GameIDCount++;  //increment by one
 
-
             File.AppendAllText(gameLocation, addGame.saveInfo().ToString() + Environment.NewLine);  //write game to the public library
             File.WriteAllText(getLibrary("\\SaveFiles\\GameLibrary\\GameID.txt"), GameIDCount.ToString());  //change gameid count
-
 
         }
 
@@ -509,9 +504,34 @@ namespace InventoryProject.Classes
 
 
 
+        //------------------CLEAR ALL INFO
+
+        public void ClearAllGames()
+        {
+            /*
+                This will Do:
+                    Clear all game library files.
+                    GAMEID.
+                    GAMEINFO.
+                    GAME LIBRARY.
+
+                    Clear all game library files in users
+             */
+
+            File.WriteAllText(getLibrary("\\SaveFiles\\GameLibrary\\GameID.txt"),"0");      //reset gameID to zero
+            File.WriteAllText(getLibrary("\\SaveFiles\\GameLibrary\\GameInfo.txt"), "");        //reset all Story and jpeg info
+            File.WriteAllText(getLibrary("\\SaveFiles\\GameLibrary\\GameLibrary.txt"), "");     //clears all games
+
+            string[] userGameLibrary = Directory.GetFiles(getLibrary("\\SaveFiles\\Users"), "uGameLibrary.txt", SearchOption.AllDirectories);     //find all the picture files
+
+            for (int i = 0; i < userGameLibrary.Length; i++)
+            {
+                File.WriteAllText(userGameLibrary[i],"");
+            }
+
+        }
 
 
-        
 
     }
 

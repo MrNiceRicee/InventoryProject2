@@ -31,6 +31,7 @@
             this.ModeSelection = new System.Windows.Forms.ComboBox();
             this.ModeLabel = new System.Windows.Forms.Label();
             this.AddTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.Notification = new System.Windows.Forms.TextBox();
             this.TextLabel7 = new System.Windows.Forms.TextBox();
             this.TextLabel6 = new System.Windows.Forms.TextBox();
             this.TextLabel5 = new System.Windows.Forms.TextBox();
@@ -40,7 +41,6 @@
             this.TextLabel1 = new System.Windows.Forms.TextBox();
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.TextBox2 = new System.Windows.Forms.TextBox();
-            this.TextBox3 = new System.Windows.Forms.TextBox();
             this.TextBox4 = new System.Windows.Forms.TextBox();
             this.TextBox5 = new System.Windows.Forms.TextBox();
             this.TextBox6 = new System.Windows.Forms.TextBox();
@@ -48,6 +48,7 @@
             this.ConfirmButton = new System.Windows.Forms.Button();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.ComboBoxLayOut = new System.Windows.Forms.ComboBox();
             this.AddTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,6 +87,8 @@
             this.AddTableLayoutPanel.ColumnCount = 2;
             this.AddTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.AddTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.AddTableLayoutPanel.Controls.Add(this.ComboBoxLayOut, 1, 2);
+            this.AddTableLayoutPanel.Controls.Add(this.Notification, 0, 7);
             this.AddTableLayoutPanel.Controls.Add(this.TextLabel7, 0, 6);
             this.AddTableLayoutPanel.Controls.Add(this.TextLabel6, 0, 5);
             this.AddTableLayoutPanel.Controls.Add(this.TextLabel5, 0, 4);
@@ -95,7 +98,6 @@
             this.AddTableLayoutPanel.Controls.Add(this.TextLabel1, 0, 0);
             this.AddTableLayoutPanel.Controls.Add(this.TextBox1, 1, 0);
             this.AddTableLayoutPanel.Controls.Add(this.TextBox2, 1, 1);
-            this.AddTableLayoutPanel.Controls.Add(this.TextBox3, 1, 2);
             this.AddTableLayoutPanel.Controls.Add(this.TextBox4, 1, 3);
             this.AddTableLayoutPanel.Controls.Add(this.TextBox5, 1, 4);
             this.AddTableLayoutPanel.Controls.Add(this.TextBox6, 1, 5);
@@ -116,6 +118,14 @@
             this.AddTableLayoutPanel.Size = new System.Drawing.Size(430, 294);
             this.AddTableLayoutPanel.TabIndex = 6;
             this.AddTableLayoutPanel.Visible = false;
+            // 
+            // Notification
+            // 
+            this.Notification.Location = new System.Drawing.Point(3, 255);
+            this.Notification.Name = "Notification";
+            this.Notification.ReadOnly = true;
+            this.Notification.Size = new System.Drawing.Size(209, 30);
+            this.Notification.TabIndex = 16;
             // 
             // TextLabel7
             // 
@@ -187,13 +197,6 @@
             this.TextBox2.Size = new System.Drawing.Size(209, 30);
             this.TextBox2.TabIndex = 1;
             // 
-            // TextBox3
-            // 
-            this.TextBox3.Location = new System.Drawing.Point(218, 75);
-            this.TextBox3.Name = "TextBox3";
-            this.TextBox3.Size = new System.Drawing.Size(209, 30);
-            this.TextBox3.TabIndex = 2;
-            // 
             // TextBox4
             // 
             this.TextBox4.Location = new System.Drawing.Point(218, 111);
@@ -255,7 +258,24 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "radioButton2";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.Visible = false;
             this.radioButton2.Click += new System.EventHandler(this.RadioButton_Click);
+            // 
+            // ComboBoxLayOut
+            // 
+            this.ComboBoxLayOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxLayOut.FormattingEnabled = true;
+            this.ComboBoxLayOut.Items.AddRange(new object[] {
+            "Add Game",
+            "Edit Game",
+            "Remove Game",
+            "Add User",
+            "Edit User",
+            "Remove User"});
+            this.ComboBoxLayOut.Location = new System.Drawing.Point(218, 75);
+            this.ComboBoxLayOut.Name = "ComboBoxLayOut";
+            this.ComboBoxLayOut.Size = new System.Drawing.Size(209, 33);
+            this.ComboBoxLayOut.TabIndex = 9;
             // 
             // AdminPage
             // 
@@ -283,7 +303,6 @@
         private System.Windows.Forms.TableLayoutPanel AddTableLayoutPanel;
         private System.Windows.Forms.TextBox TextBox1;
         private System.Windows.Forms.TextBox TextBox2;
-        private System.Windows.Forms.TextBox TextBox3;
         private System.Windows.Forms.TextBox TextBox4;
         private System.Windows.Forms.TextBox TextBox5;
         private System.Windows.Forms.TextBox TextLabel7;
@@ -298,5 +317,7 @@
         private System.Windows.Forms.Button ConfirmButton;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.TextBox Notification;
+        private System.Windows.Forms.ComboBox ComboBoxLayOut;
     }
 }

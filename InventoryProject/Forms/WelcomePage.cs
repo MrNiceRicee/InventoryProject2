@@ -399,6 +399,10 @@ namespace InventoryProject.Forms
                     if (this.AdminLabel.Visible == true)
                     {
                         Console.WriteLine("Activate Admin Page");
+                        if (Application.OpenForms.OfType<AdminPage>().Count() >= 1)
+                        {
+                            Application.OpenForms.OfType<AdminPage>().First().Close();
+                        }
                         AdminPage adminPage = new AdminPage();
                         adminPage.Show();
                     }
