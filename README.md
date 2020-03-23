@@ -3,14 +3,11 @@ Hello! This is my semester project for the Inventory management for Enterprise A
 
 
 I've worked extensively on this project and this is the second iteration.
-
 The basis still stays the same, it is still a game store browser.
 
 
 Here is what the current functionality is.
-
 Go to (Page) means its a single page transfer.
-
 Open (Page) means it will open another form
 
 
