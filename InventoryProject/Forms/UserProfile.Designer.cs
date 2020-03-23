@@ -93,7 +93,7 @@
             this.BackButtonLabel.Size = new System.Drawing.Size(52, 20);
             this.BackButtonLabel.TabIndex = 12;
             this.BackButtonLabel.Text = "Home";
-            this.BackButtonLabel.DoubleClick += new System.EventHandler(this.CustomItem_DoubleClick);
+            this.BackButtonLabel.Click += new System.EventHandler(this.CustomItem_DoubleClick);
             this.BackButtonLabel.MouseLeave += new System.EventHandler(this.CustomItem_MouseLeave);
             this.BackButtonLabel.MouseHover += new System.EventHandler(this.CustomItem_Hover);
             // 

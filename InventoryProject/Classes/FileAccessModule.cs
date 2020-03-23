@@ -219,7 +219,7 @@ namespace InventoryProject.Classes
          */
 
 
-        public void GatherImages(int amount)        //Makes images for the games
+        public void GenerateImages(int amount)        //Makes images for the games
         {
             for (int i = 0; i < amount; i++)
             {

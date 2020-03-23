@@ -128,6 +128,7 @@ namespace InventoryProject.Forms
                 PictureBox gamePicture = new PictureBox();
                 Label gameTitle = new Label();
                 Label gameStudio = new Label();
+                Label gameGenre = new Label();
                 Label gameRating = new Label();
                 Label gameSold = new Label();
                 Label gamePrice = new Label();
@@ -156,15 +157,17 @@ namespace InventoryProject.Forms
                 gameTitle.AutoSize = true;
                 gameFrame.Controls.Add(gameTitle);
                 //add it in so the size resizes
+                gameTitle.Name = StoreLibrary.FindIndex(a => a.GameID.Equals(gamelibrary[i].GameID)).ToString();
                 gameTitle.Font = new Font(this.Font.FontFamily, 10,FontStyle.Underline);
                 gameTitle.Location = new Point(gamePicture.Location.X + gamePicture.Width, 5);
                 gameTitle.ForeColor = Color.FromArgb(255, 255, 255);
                 gameTitle.BackColor = Color.FromArgb(0);
+                gameTitle.MouseClick += CustomItem_DoubleClick;
                 gameTitle.MouseHover += Label_MouseHover;
                 gameTitle.MouseLeave += Label_MouseLeave;
 
 
-                gameStudio.Text = gamelibrary[i].Studio+"\n"+gamelibrary[i].Genre;
+                gameStudio.Text = gamelibrary[i].Studio;
                 gameStudio.AutoSize = true;
                 gameFrame.Controls.Add(gameStudio);
                 //add it in so the size resizes
@@ -175,6 +178,17 @@ namespace InventoryProject.Forms
                 gameStudio.BackColor = Color.FromArgb(0);
                 gameStudio.MouseHover += Label_MouseHover;
                 gameStudio.MouseLeave += Label_MouseLeave;
+
+                gameGenre.Text = gamelibrary[i].Genre;
+                gameGenre.AutoSize = true;
+                gameFrame.Controls.Add(gameGenre);
+                //add it in so the size resizes
+                gameGenre.Font = new Font(this.Font.FontFamily, 8);
+                gameGenre.Location = new Point((gameStudio.Location.X),
+                    (gameStudio.Location.Y + gameStudio.Size.Height));
+                gameGenre.ForeColor = Color.FromArgb(255, 255, 255);
+                gameGenre.BackColor = Color.FromArgb(0);
+
 
 
                 gameRating.Text = "rating: "+gamelibrary[i].Ratings + "%";
@@ -332,7 +346,8 @@ namespace InventoryProject.Forms
             {
                 Panel suspect = (Panel)sender;
                 //Console.WriteLine(suspect.Name);
-                if (Int32.TryParse(suspect.Name,out int x))     
+                int x;
+                if (Int32.TryParse(suspect.Name,out  x))     
                 {
                     //USER HAS CLICKED ON A GAME PANEL
                     //we Go in the game library
@@ -340,6 +355,7 @@ namespace InventoryProject.Forms
 
 
                     //-----------------------------------------------------------------------------------------------------------------------------------Fix//
+
 
                     if (Application.OpenForms.OfType<GamePage>().Count() >= 1)
                     {
@@ -355,7 +371,16 @@ namespace InventoryProject.Forms
             }else if (sender is Label)
             {
                 Label suspect = (Label)sender;
-                if (suspect.Name.Equals(this.LogOutLabel.Name))
+                if (Int32.TryParse(suspect.Name, out int x))
+                {
+                    if (Application.OpenForms.OfType<GamePage>().Count() >= 1)
+                    {
+                        Application.OpenForms.OfType<GamePage>().First().Close();
+                    }
+                    GamePage gamePage = new GamePage(StoreLibrary[x], LoggedIn, this, loggedStorage.InCart);
+                    gamePage.Show();
+                }
+                else if (suspect.Name.Equals(this.LogOutLabel.Name))
                 {
                     mainForm.SetDesktopLocation(this.Location.X,this.Location.Y);
                     mainForm.Show();

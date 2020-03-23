@@ -105,6 +105,12 @@
     <Compile Include="Forms\RegisterPage.Designer.cs">
       <DependentUpon>RegisterPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StudioPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudioPage.Designer.cs">
+      <DependentUpon>StudioPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterPage.resx">
       <DependentUpon>RegisterPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudioPage.resx">
+      <DependentUpon>StudioPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserProfile.resx">
       <DependentUpon>UserProfile.cs</DependentUpon>

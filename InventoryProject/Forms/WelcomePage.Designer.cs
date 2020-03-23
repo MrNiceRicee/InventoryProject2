@@ -118,7 +118,7 @@
             this.UserProfileLabel.Size = new System.Drawing.Size(78, 17);
             this.UserProfileLabel.TabIndex = 6;
             this.UserProfileLabel.Text = "UserProfile";
-            this.UserProfileLabel.DoubleClick += new System.EventHandler(this.UserProfileLabel_DoubleClick);
+            this.UserProfileLabel.Click += new System.EventHandler(this.UserProfileLabel_DoubleClick);
             this.UserProfileLabel.MouseLeave += new System.EventHandler(this.Label_MouseLeave);
             this.UserProfileLabel.MouseHover += new System.EventHandler(this.Label_MouseHover);
             // 
@@ -134,7 +134,7 @@
             this.BrowseStore.Size = new System.Drawing.Size(129, 25);
             this.BrowseStore.TabIndex = 7;
             this.BrowseStore.Text = "Browse Store";
-            this.BrowseStore.DoubleClick += new System.EventHandler(this.BrowseStore_DoubleClick);
+            this.BrowseStore.Click += new System.EventHandler(this.BrowseStore_DoubleClick);
             this.BrowseStore.MouseLeave += new System.EventHandler(this.Label_MouseLeave);
             this.BrowseStore.MouseHover += new System.EventHandler(this.Label_MouseHover);
             // 

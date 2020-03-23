@@ -81,7 +81,6 @@ namespace InventoryProject.Forms
                 this.AddTableLayoutPanel.Visible = true;
                 this.radioButton1.Visible = true;
                 this.radioButton2.Visible = true;
-                this.radioButton2.Checked = true;
 
                 if (this.radioButton1.Checked)
                 {
@@ -100,6 +99,12 @@ namespace InventoryProject.Forms
                     this.TextLabel3.Visible = true;
                     this.TextLabel4.Visible = true;
                     this.TextLabel5.Visible = true;
+
+                    this.TextBox1.ReadOnly = false;
+                    this.TextBox2.ReadOnly = false;
+                    this.TextBox4.ReadOnly = false;
+                    this.TextBox5.ReadOnly = false;
+
 
                     this.TextBox1.Visible = true;
                     this.TextBox2.Visible = true;
@@ -392,6 +397,8 @@ namespace InventoryProject.Forms
                 this.TextLabel1.Text = "Amount";
 
                 this.TextBox1.ReadOnly = false;
+                this.TextBox1.Text = "";
+
 
                 this.TextLabel1.Visible = true;
                 this.TextBox1.Visible = true;
@@ -680,6 +687,19 @@ namespace InventoryProject.Forms
                         this.TextBox6.Text = "";
                         this.Notification.Text = "Removed User";
                     }
+                }
+            }
+            else if (selection.Equals("Add Pictures"))
+            {
+                if (Int32.TryParse(this.TextBox1.Text,out int amount))
+                {
+                    this.Notification.Text = "Loading. Please wait.";
+                    FAM.GenerateImages(amount);
+                    this.Notification.Text = "Made: " + amount + " Pictures";
+                    this.TextBox1.Text = "";
+                }else
+                {
+                    this.Notification.Text = "Enter Number";
                 }
             }
         }
