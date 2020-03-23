@@ -9,21 +9,21 @@ Go to (Page) means its a single page transfer.
 Open (Page) means it will open another form
 
 Login Page:
--User have to register to log in. Go to Register Page.
--First time registered users, the username is auto populated.
--Once user has an account they are able to log in. Go to Welcome Page.
+ User have to register to log in. Go to Register Page.
+ First time registered users, the username is auto populated.
+ Once user has an account they are able to log in. Go to Welcome Page.
   
 Register Page.
--Works normally like what you would expect.
--IGN (In game name) is what the user will be nicknamed as
--Username is the unique name that the user will be logged in
--Username has to be UNIQUE, cannot exist in the system
--Password has to be entered twice to work
--All the fields have a minimum length requirement
--Only goes to Login Page.
+ Works normally like what you would expect.
+ IGN (In game name) is what the user will be nicknamed as
+ Username is the unique name that the user will be logged in
+ Username has to be UNIQUE, cannot exist in the system
+ Password has to be entered twice to work
+ All the fields have a minimum length requirement
+ Only goes to Login Page.
   
 Welcome Page.
--This is the hub of everything
+ This is the hub of everything
 -Able to go to profile page. Go to ProfilePage.
 -Able to Browse the Store. Open BrowseStore.
 -Quick preview of the most popular games (based on units sold)
