@@ -31,6 +31,8 @@
             this.ModeSelection = new System.Windows.Forms.ComboBox();
             this.ModeLabel = new System.Windows.Forms.Label();
             this.AddTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.Notification = new System.Windows.Forms.Button();
+            this.ComboBoxLayOut = new System.Windows.Forms.ComboBox();
             this.TextLabel7 = new System.Windows.Forms.TextBox();
             this.TextLabel6 = new System.Windows.Forms.TextBox();
             this.TextLabel5 = new System.Windows.Forms.TextBox();
@@ -44,11 +46,9 @@
             this.TextBox5 = new System.Windows.Forms.TextBox();
             this.TextBox6 = new System.Windows.Forms.TextBox();
             this.ConfirmButton = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.ComboBoxLayOut = new System.Windows.Forms.ComboBox();
-            this.Notification = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.AddTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +62,8 @@
             "Remove Game",
             "Add User",
             "Edit User",
-            "Remove User"});
+            "Remove User",
+            "Add Pictures"});
             this.ModeSelection.Location = new System.Drawing.Point(623, 57);
             this.ModeSelection.Name = "ModeSelection";
             this.ModeSelection.Size = new System.Drawing.Size(165, 21);
@@ -118,6 +119,32 @@
             this.AddTableLayoutPanel.Size = new System.Drawing.Size(430, 294);
             this.AddTableLayoutPanel.TabIndex = 6;
             this.AddTableLayoutPanel.Visible = false;
+            // 
+            // Notification
+            // 
+            this.Notification.Location = new System.Drawing.Point(3, 255);
+            this.Notification.Name = "Notification";
+            this.Notification.Size = new System.Drawing.Size(209, 36);
+            this.Notification.TabIndex = 16;
+            this.Notification.Text = "Confirm";
+            this.Notification.UseVisualStyleBackColor = true;
+            this.Notification.Click += new System.EventHandler(this.Notif_Click);
+            // 
+            // ComboBoxLayOut
+            // 
+            this.ComboBoxLayOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxLayOut.FormattingEnabled = true;
+            this.ComboBoxLayOut.Items.AddRange(new object[] {
+            "Add Game",
+            "Edit Game",
+            "Remove Game",
+            "Add User",
+            "Edit User",
+            "Remove User"});
+            this.ComboBoxLayOut.Location = new System.Drawing.Point(218, 75);
+            this.ComboBoxLayOut.Name = "ComboBoxLayOut";
+            this.ComboBoxLayOut.Size = new System.Drawing.Size(209, 33);
+            this.ComboBoxLayOut.TabIndex = 9;
             // 
             // TextLabel7
             // 
@@ -181,6 +208,7 @@
             this.TextBox1.Name = "TextBox1";
             this.TextBox1.Size = new System.Drawing.Size(209, 30);
             this.TextBox1.TabIndex = 0;
+            this.TextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextOnlyNumbers_KeyPress);
             // 
             // TextBox2
             // 
@@ -222,6 +250,16 @@
             this.ConfirmButton.UseVisualStyleBackColor = true;
             this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(218, 219);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(128, 29);
+            this.checkBox1.TabIndex = 17;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
@@ -247,42 +285,6 @@
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.Visible = false;
             this.radioButton2.Click += new System.EventHandler(this.RadioButton_Click);
-            // 
-            // ComboBoxLayOut
-            // 
-            this.ComboBoxLayOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxLayOut.FormattingEnabled = true;
-            this.ComboBoxLayOut.Items.AddRange(new object[] {
-            "Add Game",
-            "Edit Game",
-            "Remove Game",
-            "Add User",
-            "Edit User",
-            "Remove User"});
-            this.ComboBoxLayOut.Location = new System.Drawing.Point(218, 75);
-            this.ComboBoxLayOut.Name = "ComboBoxLayOut";
-            this.ComboBoxLayOut.Size = new System.Drawing.Size(209, 33);
-            this.ComboBoxLayOut.TabIndex = 9;
-            // 
-            // Notification
-            // 
-            this.Notification.Location = new System.Drawing.Point(3, 255);
-            this.Notification.Name = "Notification";
-            this.Notification.Size = new System.Drawing.Size(209, 36);
-            this.Notification.TabIndex = 16;
-            this.Notification.Text = "Confirm";
-            this.Notification.UseVisualStyleBackColor = true;
-            this.Notification.Click += new System.EventHandler(this.Notif_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(218, 219);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(128, 29);
-            this.checkBox1.TabIndex = 17;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // AdminPage
             // 

@@ -546,6 +546,21 @@ namespace InventoryProject.Classes
                 return false;
             }
         }
+        public Boolean CheckUserAdmin(String username)
+        {
+            var location = getLibrary("\\SaveFiles\\Users\\Admins.txt");
+
+            var FileString = File.ReadAllLines(location);
+
+            if (FileString.Any(a => a.Equals(username, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
         public void makeUserAdmin(User selectUser)
@@ -582,6 +597,50 @@ namespace InventoryProject.Classes
                 }
             }
             return newUser;
+        }
+
+        public void RemoveUser(User selectedUser)
+        {            
+            var userLocation = getLibrary("\\SaveFiles\\Users\\"+selectedUser.UserName);
+            if (Directory.Exists(userLocation))
+            {
+                Directory.Delete(userLocation,true);
+            }
+            else
+            {
+            }
+        }
+
+        public void RenamedUserSave(User selectedUser, string oldUsername)
+        {
+            try
+            {
+                if (CheckUserAdmin(oldUsername))
+                {
+                    var adminlocation = getLibrary("\\SaveFiles\\Users\\Admins.txt");
+                    List<String> StringList = new List<String>(File.ReadAllLines(adminlocation));
+                    String newList = "";
+                    for (int i = 0; i < StringList.Count; i++)
+                    {
+                        if (StringList[i].Equals(oldUsername))
+                        {
+                            StringList[i] = selectedUser.UserName;
+                        }
+                        newList += StringList[i] + "\n";
+                    }
+                    File.WriteAllText(adminlocation, newList);
+                }
+                System.IO.Directory.Move(getLibrary("\\SaveFiles\\Users\\" + oldUsername), getLibrary("\\Savefiles\\Users\\" + selectedUser.UserName));
+                if (Directory.Exists(getLibrary("\\SaveFiles\\Users\\" + oldUsername)))
+                {
+                    Directory.Delete(getLibrary("\\SaveFiles\\Users\\" + oldUsername));
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
 
