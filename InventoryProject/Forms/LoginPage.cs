@@ -104,7 +104,7 @@ namespace InventoryProject
 
             RandomizeGame RandomGame = new RandomizeGame();
 
-            /* FAM.ToGameFile(FAM.CreateGame(10));*/
+             FAM.ToGameFile(FAM.CreateGame(200));
         }
 
         private void our_FormClosed(object sender, FormClosedEventArgs e)
@@ -169,6 +169,11 @@ namespace InventoryProject
             {
                 loggingIn();
             }
+        }
+
+        private void LoginPage_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

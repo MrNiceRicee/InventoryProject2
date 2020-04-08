@@ -37,5 +37,7 @@ namespace InventoryProject.Classes
                 this.Password + seperate +
                 this.Funds);
         }
+
+        // "examename /,/ username /,/ password /,/ somenumber"
     }
 }
